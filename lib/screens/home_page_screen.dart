@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mood_tracker/constants.dart';
 import 'package:mood_tracker/screens/chart_screen.dart';
 
 class HomePageScreen extends StatefulWidget {
@@ -18,8 +19,60 @@ class _HomePageScreenState extends State<HomePageScreen> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(),
+      body: Column(
+        children: [
+          Expanded(
+            flex: 5,
+            child: Row(
+              children: [
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Icon(
+                        Icons.sentiment_satisfied_alt,
+                        size: kIconsSize,
+                        color: kMainColorGreen,
+                      ),
+                      Icon(
+                        Icons.sentiment_neutral,
+                        size: kIconsSize,
+                        color: kMainColorYellow,
+                      ),
+                      Icon(
+                        Icons.sentiment_very_dissatisfied,
+                        size: kIconsSize,
+                        color: kMainColorRed,
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    child: null,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Container(
+              color: Colors.blue,
+              child: Row(),
+            ),
+          ),
+          Expanded(
+            flex: 1,
+            child: Container(
+              color: Colors.green,
+              child: TextButton(
+                child: Text('Сохранить'),
+                onPressed: null,
+              ),
+            ),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
