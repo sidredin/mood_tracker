@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mood_tracker/constants.dart';
+import 'package:mood_tracker/example_slider.dart';
 import 'package:mood_tracker/screens/chart_screen.dart';
 import 'package:mood_tracker/screens/home_page_screen.dart';
 import 'package:mood_tracker/screens/point_view_screen.dart';
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
             HomePageScreen(title: 'Трекер настроения'),
         ChartScreen.id: (context) => ChartScreen(title: 'График'),
         PointViewScreen.id: (context) => PointViewScreen(title: 'Точка'),
+        ExampleSlider.id: (context) => ExampleSlider(title: 'Слайдеры'),
       },
     );
   }
