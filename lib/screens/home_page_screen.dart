@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_xlider/flutter_xlider.dart';
 import 'package:mood_tracker/constants.dart';
 import 'package:mood_tracker/screens/chart_screen.dart';
+import 'package:syncfusion_flutter_core/theme.dart';
+import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 class HomePageScreen extends StatefulWidget {
   HomePageScreen({Key key, this.title}) : super(key: key);
 
   final String title;
-  static const String id = 'home_page_screen';
+  static const String routeName = 'home_page_screen';
 
   @override
   _HomePageScreenState createState() => _HomePageScreenState();
 }
 
 class _HomePageScreenState extends State<HomePageScreen> {
-  double _currentSliderValue = 20;
+  double _value = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -31,15 +32,12 @@ class _HomePageScreenState extends State<HomePageScreen> {
                 Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Icon(
                         Icons.sentiment_satisfied_alt,
                         size: kIconsSize,
                         color: kMainColorGreen,
-                      ),
-                      Icon(
-                        Icons.sentiment_neutral,
-                        size: kIconsSize,
                       ),
                       Icon(
                         Icons.sentiment_very_dissatisfied,
@@ -51,43 +49,34 @@ class _HomePageScreenState extends State<HomePageScreen> {
                 ),
                 Expanded(
                   child: Container(
-                    child: Slider(
-                      value: _currentSliderValue,
-                      min: 0,
-                      max: 100,
-                      divisions: 5,
-                      label: _currentSliderValue.round().toString(),
-                      onChanged: (double value) {
-                        setState(() {
-                          _currentSliderValue = value;
-                        });
-                      },
+                    alignment: Alignment.centerLeft,
+                    child: SfSliderTheme(
+                      data: SfSliderThemeData(
+                          // activeTrackHeight: 10,
+                          // inactiveTrackHeight: 10,
+                          ),
+                      child: SfSlider.vertical(
+                        min: -10,
+                        max: 10,
+                        activeColor: kMainColorYellow,
+                        stepSize: 1.0,
+                        value: _value,
+                        interval: 1.0,
+                        showTicks: true,
+                        showLabels: true,
+                        enableTooltip: true,
+                        onChanged: (dynamic value) {
+                          setState(() {
+                            _value = value;
+                          });
+                        },
+                      ),
                     ),
-                    // child: FlutterSlider(
-                    //   axis: Axis.vertical,
-                    //   values: [60],
-                    //   fixedValues: [
-                    //     FlutterSliderFixedValue(percent: 0, value: "1000"),
-                    //     FlutterSliderFixedValue(percent: 10, value: "10K"),
-                    //     FlutterSliderFixedValue(percent: 50, value: 50000),
-                    //     FlutterSliderFixedValue(percent: 80, value: "80M"),
-                    //     FlutterSliderFixedValue(percent: 100, value: "100B"),
-                    //   ],
-                    //   trackBar: FlutterSliderTrackBar(
-                    //     activeTrackBarHeight: 5,
-                    //   ),
-                    //   max: 10,
-                    //   min: -10,
-                    //   onDragging: (handlerIndex, lowerValue, upperValue) {
-                    //     print('------');
-                    //     print(lowerValue);
-                    //     print(upperValue);
-                    //     // _lowerValue = lowerValue;
-                    //     // _upperValue = upperValue;
-                    //     // setState(() {});
-                    //   },
-                    // ),
                   ),
+                ),
+                Expanded(
+                  // пустышка, чтобы шкала была по центру экрана
+                  child: Container(),
                 ),
               ],
             ),
@@ -95,25 +84,82 @@ class _HomePageScreenState extends State<HomePageScreen> {
           Expanded(
             flex: 1,
             child: Container(
-              color: Colors.blue,
-              child: Row(),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    icon: Icon(
+                      Icons.note_alt_outlined,
+                      color: Colors.black,
+                    ),
+                    highlightColor: Colors.red,
+                    splashColor: Colors.yellow,
+                    iconSize: 48,
+                    onPressed: () {
+                      // setState(() {
+                      //   _isBluetoothOn = !_isBluetoothOn;
+                      // });
+                    },
+                  ),
+                  IconButton(
+                    icon: Icon(
+                      Icons.mic_rounded,
+                      color: Colors.black,
+                    ),
+                    highlightColor: Colors.red,
+                    splashColor: Colors.yellow,
+                    iconSize: 48,
+                    onPressed: () {
+                      // setState(() {
+                      //   _isBluetoothOn = !_isBluetoothOn;
+                      // });
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
           Expanded(
             flex: 1,
-            child: Container(
-              color: Colors.green,
-              child: TextButton(
-                child: Text('Сохранить'),
-                onPressed: null,
-              ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(4),
+                    child: Stack(
+                      children: <Widget>[
+                        Positioned.fill(
+                          child: Container(
+                            color: kMainColorGreen,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 30,
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 1.0, horizontal: 10.0),
+                              primary: Colors.white,
+                              textStyle: const TextStyle(fontSize: 20),
+                            ),
+                            onPressed: () {},
+                            child: const Text('Сохранить'),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushNamed(context, ChartScreen.id);
+          Navigator.pushNamed(context, ChartScreen.routeName);
         },
         tooltip: 'Chart',
         child: Icon(Icons.bar_chart_rounded),

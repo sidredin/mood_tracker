@@ -5,7 +5,7 @@ class ChartScreen extends StatefulWidget {
   ChartScreen({Key key, this.title}) : super(key: key);
 
   final String title;
-  static const String id = 'chart_screen';
+  static const String routeName = 'chart_screen';
 
   @override
   _ChartScreenState createState() => _ChartScreenState();
@@ -23,7 +23,7 @@ class _ChartScreenState extends State<ChartScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushNamed(context, PointViewScreen.id);
+          Navigator.pushNamed(context, PointViewScreen.routeName);
         },
         tooltip: 'Chart',
         child: Icon(Icons.bubble_chart),

@@ -5,7 +5,7 @@ class PointViewScreen extends StatefulWidget {
   PointViewScreen({Key key, this.title}) : super(key: key);
 
   final String title;
-  static const String id = 'point_view_screen';
+  static const String routeName = 'point_view_screen';
 
   @override
   _PointViewScreenState createState() => _PointViewScreenState();
@@ -23,7 +23,7 @@ class _PointViewScreenState extends State<PointViewScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushNamed(context, ExampleSlider.id);
+          Navigator.pushNamed(context, ExampleSlider.routeName);
         },
         tooltip: 'Chart',
         child: Icon(Icons.slideshow),

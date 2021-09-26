@@ -17,13 +17,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: kMainColorBlue,
       ),
-      initialRoute: HomePageScreen.id,
+      initialRoute: HomePageScreen.routeName,
       routes: {
-        HomePageScreen.id: (context) =>
+        HomePageScreen.routeName: (context) =>
             HomePageScreen(title: 'Трекер настроения'),
-        ChartScreen.id: (context) => ChartScreen(title: 'График'),
-        PointViewScreen.id: (context) => PointViewScreen(title: 'Точка'),
-        ExampleSlider.id: (context) => ExampleSlider(title: 'Слайдеры'),
+        ChartScreen.routeName: (context) => ChartScreen(title: 'График'),
+        PointViewScreen.routeName: (context) => PointViewScreen(title: 'Точка'),
+        ExampleSlider.routeName: (context) => ExampleSlider(title: 'Слайдеры'),
       },
     );
   }
