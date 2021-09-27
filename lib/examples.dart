@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-class ExampleSlider extends StatefulWidget {
-  ExampleSlider({Key key, this.title}) : super(key: key);
+class Examples extends StatefulWidget {
+  Examples({Key key, this.title}) : super(key: key);
 
   final String title;
   static const String routeName = 'example_slider';
 
   @override
-  _ExampleSliderState createState() => _ExampleSliderState();
+  _ExamplesState createState() => _ExamplesState();
 }
 
-class _ExampleSliderState extends State<ExampleSlider> {
+class _ExamplesState extends State<Examples> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

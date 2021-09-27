@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mood_tracker/example_slider.dart';
+import 'package:mood_tracker/examples.dart';
 
 class PointViewScreen extends StatefulWidget {
   PointViewScreen({Key key, this.title}) : super(key: key);
@@ -23,7 +23,7 @@ class _PointViewScreenState extends State<PointViewScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushNamed(context, ExampleSlider.routeName);
+          Navigator.pushNamed(context, Examples.routeName);
         },
         tooltip: 'Chart',
         child: Icon(Icons.slideshow),
