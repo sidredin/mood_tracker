@@ -96,9 +96,29 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     splashColor: Colors.yellow,
                     iconSize: 48,
                     onPressed: () {
-                      // setState(() {
-                      //   _isBluetoothOn = !_isBluetoothOn;
-                      // });
+                      showModalBottomSheet<void>(
+                        elevation: 1000,
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Container(
+                            height: 600,
+                            // color: Colors.amber,
+                            child: Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  const Text('Modal BottomSheet'),
+                                  ElevatedButton(
+                                    child: const Text('Close BottomSheet'),
+                                    onPressed: () => Navigator.pop(context),
+                                  )
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      );
                     },
                   ),
                   IconButton(
@@ -110,9 +130,29 @@ class _HomePageScreenState extends State<HomePageScreen> {
                     splashColor: Colors.yellow,
                     iconSize: 48,
                     onPressed: () {
-                      // setState(() {
-                      //   _isBluetoothOn = !_isBluetoothOn;
-                      // });
+                      showModalBottomSheet<void>(
+                        elevation: 1000,
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Container(
+                            height: 600,
+                            // color: Colors.amber,
+                            child: Center(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.min,
+                                children: <Widget>[
+                                  const Text('Modal BottomSheet'),
+                                  ElevatedButton(
+                                    child: const Text('Close BottomSheet'),
+                                    onPressed: () => Navigator.pop(context),
+                                  )
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      );
                     },
                   ),
                 ],
