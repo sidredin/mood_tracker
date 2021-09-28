@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:mood_tracker/examples.dart';
 
 class PointViewScreen extends StatefulWidget {
-  PointViewScreen({Key key, this.title}) : super(key: key);
+  PointViewScreen({Key? key, this.title}) : super(key: key);
 
-  final String title;
+  final String? title;
   static const String routeName = 'point_view_screen';
 
   @override
@@ -16,7 +16,7 @@ class _PointViewScreenState extends State<PointViewScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(widget.title!),
       ),
       body: Center(
         child: Column(),

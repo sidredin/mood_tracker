@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class Examples extends StatefulWidget {
-  Examples({Key key, this.title}) : super(key: key);
+  Examples({Key? key, this.title}) : super(key: key);
 
-  final String title;
+  final String? title;
   static const String routeName = 'example_slider';
 
   @override
@@ -15,11 +15,11 @@ class _ExamplesState extends State<Examples> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(widget.title!),
       ),
       body: SingleChildScrollView(
         child: Column(
-          children: null,
+          children: [],
         ),
       ),
     );

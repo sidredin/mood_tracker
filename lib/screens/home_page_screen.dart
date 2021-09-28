@@ -5,9 +5,9 @@ import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
 class HomePageScreen extends StatefulWidget {
-  HomePageScreen({Key key, this.title}) : super(key: key);
+  HomePageScreen({Key? key, this.title}) : super(key: key);
 
-  final String title;
+  final String? title;
   static const String routeName = 'home_page_screen';
 
   @override
@@ -15,13 +15,13 @@ class HomePageScreen extends StatefulWidget {
 }
 
 class _HomePageScreenState extends State<HomePageScreen> {
-  double _value = 0;
+  double? _value = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(widget.title!),
       ),
       body: Column(
         children: [

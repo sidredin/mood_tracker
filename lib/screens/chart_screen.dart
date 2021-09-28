@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:mood_tracker/screens/point_view_screen.dart';
 
 class ChartScreen extends StatefulWidget {
-  ChartScreen({Key key, this.title}) : super(key: key);
+  ChartScreen({Key? key, this.title}) : super(key: key);
 
-  final String title;
+  final String? title;
   static const String routeName = 'chart_screen';
 
   @override
@@ -16,7 +16,7 @@ class _ChartScreenState extends State<ChartScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(widget.title!),
       ),
       body: Center(
         child: Column(),

@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
             HomePageScreen(title: 'Трекер настроения'),
         ChartScreen.routeName: (context) => ChartScreen(title: 'График'),
         PointViewScreen.routeName: (context) => PointViewScreen(title: 'Точка'),
-        Examples.routeName: (context) => Examples(title: 'Слайдеры'),
+        Examples.routeName: (context) => Examples(title: 'Примеры'),
       },
     );
   }
