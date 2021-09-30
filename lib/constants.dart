@@ -64,4 +64,41 @@ const MaterialColor kMainColorYellow = const MaterialColor(
   },
 );
 
+const MaterialColor kInactiveBtnColor = const MaterialColor(
+  0xFFC4C4C4,
+  const <int, Color>{
+    50: const Color(0xFFC4C4C4),
+    100: const Color(0xFFC4C4C4),
+    200: const Color(0xFFC4C4C4),
+    300: const Color(0xFFC4C4C4),
+    400: const Color(0xFFC4C4C4),
+    500: const Color(0xFFC4C4C4),
+    600: const Color(0xFFC4C4C4),
+    700: const Color(0xFFC4C4C4),
+    800: const Color(0xFFC4C4C4),
+    900: const Color(0xFFC4C4C4),
+  },
+);
+
 const double kIconsSize = 50.0;
+
+MaterialStateProperty<TextStyle> kBtnTextStyle =
+    MaterialStateProperty.all<TextStyle>(TextStyle(fontSize: 16));
+
+MaterialStateProperty<Color> kBtnColor =
+    MaterialStateProperty.all<Color>(kMainColorGreen);
+
+const kTextFieldInputDecoration = InputDecoration(
+  filled: true,
+  fillColor: Colors.white,
+  hintText: 'Опишите свои мысли, чувства \nна данный момент',
+  hintStyle: TextStyle(
+    color: Colors.grey,
+  ),
+  border: OutlineInputBorder(
+    borderRadius: BorderRadius.all(
+      Radius.circular(10.0),
+    ),
+    // borderSide: BorderSide.none,
+  ),
+);

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:mood_tracker/components/button.dart';
 import 'package:mood_tracker/constants.dart';
 import 'package:mood_tracker/screens/chart_screen.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
@@ -16,6 +18,9 @@ class HomePageScreen extends StatefulWidget {
 
 class _HomePageScreenState extends State<HomePageScreen> {
   double? _value = 0;
+  String? comment;
+  String? commentForSaving;
+  Color noteIconColor = Colors.black;
 
   @override
   Widget build(BuildContext context) {
@@ -90,69 +95,99 @@ class _HomePageScreenState extends State<HomePageScreen> {
                   IconButton(
                     icon: Icon(
                       Icons.note_alt_outlined,
-                      color: Colors.black,
+                      color: noteIconColor,
                     ),
                     highlightColor: Colors.red,
                     splashColor: Colors.yellow,
-                    iconSize: 48,
-                    onPressed: () {
-                      showModalBottomSheet<void>(
-                        elevation: 1000,
+                    iconSize: kIconsSize,
+                    onPressed: () async {
+                      await showModalBottomSheet<String>(
+                        isScrollControlled: true,
                         context: context,
                         builder: (BuildContext context) {
                           return Container(
-                            height: 600,
-                            // color: Colors.amber,
                             child: Center(
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                mainAxisSize: MainAxisSize.min,
                                 children: <Widget>[
-                                  const Text('Modal BottomSheet'),
-                                  ElevatedButton(
-                                    child: const Text('Close BottomSheet'),
-                                    onPressed: () => Navigator.pop(context),
-                                  )
+                                  Expanded(child: Container()),
+                                  Expanded(
+                                    flex: 10,
+                                    child: Center(
+                                      child: Column(
+                                        children: [
+                                          Container(
+                                            padding: EdgeInsets.all(20.0),
+                                            child: TextFormField(
+                                              initialValue: commentForSaving,
+                                              maxLengthEnforcement:
+                                                  MaxLengthEnforcement.enforced,
+                                              maxLines: null,
+                                              maxLength: 800,
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                              ),
+                                              decoration:
+                                                  kTextFieldInputDecoration,
+                                              onChanged: (value) {
+                                                if (value.trim() != '') {
+                                                  comment = value;
+                                                  print('comment: $comment');
+                                                } else {
+                                                  comment = null;
+                                                  print('comment: $comment');
+                                                }
+                                              },
+                                            ),
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Button(
+                                                text: 'Отменить',
+                                                color: kInactiveBtnColor,
+                                                onPressed: () {
+                                                  setState(() {
+                                                    comment = commentForSaving;
+                                                  });
+                                                  return Navigator.pop(context);
+                                                },
+                                              ),
+                                              SizedBox(
+                                                width: 10.0,
+                                              ),
+                                              Button(
+                                                text: 'Сохранить',
+                                                onPressed: () {
+                                                  setState(() {
+                                                    commentForSaving = comment;
+                                                  });
+                                                  return Navigator.pop(context);
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
                           );
                         },
                       );
-                    },
-                  ),
-                  IconButton(
-                    icon: Icon(
-                      Icons.mic_rounded,
-                      color: Colors.black,
-                    ),
-                    highlightColor: Colors.red,
-                    splashColor: Colors.yellow,
-                    iconSize: 48,
-                    onPressed: () {
-                      showModalBottomSheet<void>(
-                        elevation: 1000,
-                        context: context,
-                        builder: (BuildContext context) {
-                          return Container(
-                            height: 600,
-                            // color: Colors.amber,
-                            child: Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                mainAxisSize: MainAxisSize.min,
-                                children: <Widget>[
-                                  const Text('Modal BottomSheet'),
-                                  ElevatedButton(
-                                    child: const Text('Close BottomSheet'),
-                                    onPressed: () => Navigator.pop(context),
-                                  )
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                      );
+                      // print('commentForSaving: $commentForSaving');
+                      if (commentForSaving != null) {
+                        setState(() {
+                          noteIconColor = kMainColorGreen;
+                        });
+                      } else {
+                        setState(() {
+                          noteIconColor = Colors.black;
+                        });
+                      }
                     },
                   ),
                 ],
@@ -166,30 +201,9 @@ class _HomePageScreenState extends State<HomePageScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(4),
-                    child: Stack(
-                      children: <Widget>[
-                        Positioned.fill(
-                          child: Container(
-                            color: kMainColorGreen,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 30,
-                          child: TextButton(
-                            style: TextButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 1.0, horizontal: 10.0),
-                              primary: Colors.white,
-                              textStyle: const TextStyle(fontSize: 20),
-                            ),
-                            onPressed: () {},
-                            child: const Text('Сохранить'),
-                          ),
-                        ),
-                      ],
-                    ),
+                  child: Button(
+                    text: 'Сохранить',
+                    onPressed: () {},
                   ),
                 ),
               ],
