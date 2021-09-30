@@ -102,3 +102,8 @@ const kTextFieldInputDecoration = InputDecoration(
     // borderSide: BorderSide.none,
   ),
 );
+
+const Icon kIconCheckedActive = Icon(
+  Icons.check_circle_rounded,
+  color: kMainColorGreen,
+);

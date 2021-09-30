@@ -20,7 +20,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
   double? _value = 0;
   String? comment;
   String? commentForSaving;
-  Color noteIconColor = Colors.black;
+  Widget iconChecked = Container();
 
   @override
   Widget build(BuildContext context) {
@@ -92,103 +92,116 @@ class _HomePageScreenState extends State<HomePageScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  IconButton(
-                    icon: Icon(
-                      Icons.note_alt_outlined,
-                      color: noteIconColor,
-                    ),
-                    highlightColor: Colors.red,
-                    splashColor: Colors.yellow,
-                    iconSize: kIconsSize,
-                    onPressed: () async {
-                      await showModalBottomSheet<String>(
-                        isScrollControlled: true,
-                        context: context,
-                        builder: (BuildContext context) {
-                          return Container(
-                            child: Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  Expanded(child: Container()),
-                                  Expanded(
-                                    flex: 10,
-                                    child: Center(
-                                      child: Column(
-                                        children: [
-                                          Container(
-                                            padding: EdgeInsets.all(20.0),
-                                            child: TextFormField(
-                                              initialValue: commentForSaving,
-                                              maxLengthEnforcement:
-                                                  MaxLengthEnforcement.enforced,
-                                              maxLines: null,
-                                              maxLength: 800,
-                                              style: TextStyle(
-                                                color: Colors.black,
-                                              ),
-                                              decoration:
-                                                  kTextFieldInputDecoration,
-                                              onChanged: (value) {
-                                                if (value.trim() != '') {
-                                                  comment = value;
-                                                  print('comment: $comment');
-                                                } else {
-                                                  comment = null;
-                                                  print('comment: $comment');
-                                                }
-                                              },
-                                            ),
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
+                  Stack(
+                    children: [
+                      IconButton(
+                        icon: Icon(
+                          Icons.note_alt_outlined,
+                          color: Colors.black,
+                        ),
+                        highlightColor: Colors.red,
+                        splashColor: Colors.yellow,
+                        iconSize: kIconsSize,
+                        onPressed: () async {
+                          await showModalBottomSheet<String>(
+                            isScrollControlled: true,
+                            context: context,
+                            builder: (BuildContext context) {
+                              return Container(
+                                child: Center(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Expanded(child: Container()),
+                                      Expanded(
+                                        flex: 10,
+                                        child: Center(
+                                          child: Column(
                                             children: [
-                                              Button(
-                                                text: 'Отменить',
-                                                color: kInactiveBtnColor,
-                                                onPressed: () {
-                                                  setState(() {
-                                                    comment = commentForSaving;
-                                                  });
-                                                  return Navigator.pop(context);
-                                                },
+                                              Container(
+                                                padding: EdgeInsets.all(20.0),
+                                                child: TextFormField(
+                                                  initialValue:
+                                                      commentForSaving,
+                                                  maxLengthEnforcement:
+                                                      MaxLengthEnforcement
+                                                          .enforced,
+                                                  maxLines: null,
+                                                  maxLength: 800,
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                  ),
+                                                  decoration:
+                                                      kTextFieldInputDecoration,
+                                                  onChanged: (value) {
+                                                    if (value.trim() != '') {
+                                                      comment = value;
+                                                      print(
+                                                          'comment: $comment');
+                                                    } else {
+                                                      comment = null;
+                                                      print(
+                                                          'comment: $comment');
+                                                    }
+                                                  },
+                                                ),
                                               ),
-                                              SizedBox(
-                                                width: 10.0,
-                                              ),
-                                              Button(
-                                                text: 'Сохранить',
-                                                onPressed: () {
-                                                  setState(() {
-                                                    commentForSaving = comment;
-                                                  });
-                                                  return Navigator.pop(context);
-                                                },
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Button(
+                                                    text: 'Отменить',
+                                                    color: kInactiveBtnColor,
+                                                    onPressed: () {
+                                                      setState(() {
+                                                        comment =
+                                                            commentForSaving;
+                                                      });
+                                                      return Navigator.pop(
+                                                          context);
+                                                    },
+                                                  ),
+                                                  SizedBox(
+                                                    width: 10.0,
+                                                  ),
+                                                  Button(
+                                                    text: 'Сохранить',
+                                                    onPressed: () {
+                                                      setState(() {
+                                                        commentForSaving =
+                                                            comment;
+                                                      });
+                                                      return Navigator.pop(
+                                                          context);
+                                                    },
+                                                  ),
+                                                ],
                                               ),
                                             ],
                                           ),
-                                        ],
+                                        ),
                                       ),
-                                    ),
+                                    ],
                                   ),
-                                ],
-                              ),
-                            ),
+                                ),
+                              );
+                            },
                           );
+                          // print('commentForSaving: $commentForSaving');
+                          if (commentForSaving != null) {
+                            setState(() {
+                              iconChecked = kIconCheckedActive;
+                            });
+                          } else {
+                            setState(() {
+                              iconChecked = Container();
+                            });
+                          }
                         },
-                      );
-                      // print('commentForSaving: $commentForSaving');
-                      if (commentForSaving != null) {
-                        setState(() {
-                          noteIconColor = kMainColorGreen;
-                        });
-                      } else {
-                        setState(() {
-                          noteIconColor = Colors.black;
-                        });
-                      }
-                    },
+                      ),
+                      iconChecked,
+                    ],
                   ),
                 ],
               ),
