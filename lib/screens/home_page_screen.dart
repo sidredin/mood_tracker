@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mood_tracker/components/button.dart';
 import 'package:mood_tracker/constants.dart';
+import 'package:mood_tracker/models/graph_point.dart';
 import 'package:mood_tracker/screens/chart_screen.dart';
+import 'package:mood_tracker/services/db_interaction.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
@@ -21,6 +23,18 @@ class _HomePageScreenState extends State<HomePageScreen> {
   String? comment;
   String? commentForSaving;
   Widget iconChecked = Container();
+  late DbInteractions db;
+
+  @override
+  void initState() {
+    try {
+      db = DbInteractions();
+    } catch (e) {
+      print("Возникло исключение: $e");
+    }
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -136,12 +150,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                                   onChanged: (value) {
                                                     if (value.trim() != '') {
                                                       comment = value;
-                                                      print(
-                                                          'comment: $comment');
                                                     } else {
                                                       comment = null;
-                                                      print(
-                                                          'comment: $comment');
                                                     }
                                                   },
                                                 ),
@@ -188,7 +198,6 @@ class _HomePageScreenState extends State<HomePageScreen> {
                               );
                             },
                           );
-                          // print('commentForSaving: $commentForSaving');
                           if (commentForSaving != null) {
                             setState(() {
                               iconChecked = kIconCheckedActive;
@@ -216,7 +225,19 @@ class _HomePageScreenState extends State<HomePageScreen> {
                 Container(
                   child: Button(
                     text: 'Сохранить',
-                    onPressed: () {},
+                    onPressed: () async {
+                      var graphPoint = GraphPoint(
+                        datetime: DateTime.now().millisecondsSinceEpoch,
+                        moodValue: _value!.toInt(),
+                        comment: commentForSaving,
+                      );
+                      try {
+                        db.insertGraphPoint(graphPoint);
+                        print(await db.graphPoints());
+                      } catch (e) {
+                        print("Возникло исключение: $e");
+                      }
+                    },
                   ),
                 ),
               ],
