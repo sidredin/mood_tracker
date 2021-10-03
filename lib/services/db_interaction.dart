@@ -74,4 +74,27 @@ class DbInteractions {
       whereArgs: [datetime],
     );
   }
+
+  getLastMoodValue() async {
+    final db = await database;
+
+    if (db != null) {
+      var lastGraphPoint = await db.rawQuery(
+          'SELECT * FROM "graphPoints" WHERE datetime = (SELECT MAX(datetime) FROM "graphPoints")');
+      if (lastGraphPoint.length > 0)
+        return lastGraphPoint.first['moodValue'];
+      else
+        return 0;
+    } else
+      throw Exception('Can`t open DB');
+  }
+
+  deleteAllGraphPoints() async {
+    final db = await database;
+
+    if (db != null) {
+      await db.delete('graphPoints');
+    } else
+      throw Exception('Can`t open DB');
+  }
 }

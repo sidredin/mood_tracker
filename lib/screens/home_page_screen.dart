@@ -19,18 +19,29 @@ class HomePageScreen extends StatefulWidget {
 }
 
 class _HomePageScreenState extends State<HomePageScreen> {
-  double? _value = 0;
+  num? _value = 0;
   String? comment;
   String? commentForSaving;
   Widget iconChecked = Container();
   late DbInteractions db;
 
+  Future<void> getLastGraphPoint() async {
+    try {
+      db = DbInteractions();
+      _value = await db.getLastMoodValue();
+    } catch (e) {
+      print("Error: $e");
+    }
+  }
+
   @override
   void initState() {
     try {
       db = DbInteractions();
+
+      getLastGraphPoint();
     } catch (e) {
-      print("Возникло исключение: $e");
+      print("Error: $e");
     }
 
     super.initState();
@@ -233,9 +244,27 @@ class _HomePageScreenState extends State<HomePageScreen> {
                       );
                       try {
                         db.insertGraphPoint(graphPoint);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            backgroundColor: kMainColorYellow,
+                            content: const Text('Данные сохранены'),
+                            action: SnackBarAction(
+                              label: 'Закрыть',
+                              onPressed: () {
+                                // Code to execute.
+                              },
+                            ),
+                          ),
+                        );
+                        setState(() {
+                          comment = null;
+                          commentForSaving = null;
+                          iconChecked = Container();
+                        });
+                        // await db.deleteAllGraphPoints();
                         print(await db.graphPoints());
                       } catch (e) {
-                        print("Возникло исключение: $e");
+                        print("Error: $e");
                       }
                     },
                   ),

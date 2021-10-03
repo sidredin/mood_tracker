@@ -17,10 +17,8 @@ class GraphPoint {
     };
   }
 
-  // Implement toString to make it easier to see information about
-  // each dog when using the print statement.
   @override
   String toString() {
-    return 'Dog{datetime: $datetime, moodValue: $moodValue, comment: $comment}';
+    return 'GraphPoint{datetime: $datetime, moodValue: $moodValue, comment: $comment}';
   }
 }
