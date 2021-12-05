@@ -23,6 +23,7 @@
 # Flutter/Dart/Pub related
 **/doc/api/
 **/ios/Flutter/.last_build_id
+**/ios/build/Pods.build/Release-iphonesimulator/
 .dart_tool/
 .flutter-plugins
 .flutter-plugins-dependencies
@@ -30,6 +31,8 @@
 .pub-cache/
 .pub/
 /build/
+key.properties
+*.jks
 
 # Web related
 lib/generated_plugin_registrant.dart
@@ -41,6 +44,6 @@ app.*.symbols
 app.*.map.json
 
 # Android Studio will place build artifacts here
-/android/app/debug
-/android/app/profile
-/android/app/release
+/*/android/app/debug
+/*/android/app/profile
+/*/android/app/release

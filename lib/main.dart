@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mood_tracker/constants.dart';
-import 'package:mood_tracker/examples.dart';
-import 'package:mood_tracker/screens/chart_screen.dart';
-import 'package:mood_tracker/screens/home_page_screen.dart';
-import 'package:mood_tracker/screens/point_view_screen.dart';
+import 'package:mood_tracker/views/screens/chart_screen.dart';
+import 'package:mood_tracker/views/screens/examples.dart';
+import 'package:mood_tracker/views/screens/home_page_screen.dart';
+import 'package:mood_tracker/views/screens/point_view_screen.dart';
+import 'package:mood_tracker/views/styling/mt_colors.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Трекер настроения',
       theme: ThemeData(
-        primarySwatch: kMainColorBlue,
+        primarySwatch: MTColors.kMainColorBlue,
       ),
       initialRoute: HomePageScreen.routeName,
       routes: {

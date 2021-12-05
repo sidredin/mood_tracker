@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mood_tracker/screens/point_view_screen.dart';
+import 'package:mood_tracker/views/screens/point_view_screen.dart';
 
 class ChartScreen extends StatefulWidget {
   ChartScreen({Key? key, this.title}) : super(key: key);

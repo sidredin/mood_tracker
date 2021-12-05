@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mood_tracker/components/button.dart';
+import 'package:mood_tracker/views/screens/chart_screen.dart';
+import 'package:mood_tracker/views/widgets/mt_button.dart';
 import 'package:mood_tracker/constants.dart';
 import 'package:mood_tracker/models/graph_point.dart';
-import 'package:mood_tracker/screens/chart_screen.dart';
 import 'package:mood_tracker/services/db_interaction.dart';
+import 'package:mood_tracker/views/styling/mt_colors.dart';
+import 'package:mood_tracker/views/styling/mt_decorations.dart';
 import 'package:syncfusion_flutter_core/theme.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 
@@ -67,12 +69,12 @@ class _HomePageScreenState extends State<HomePageScreen> {
                       Icon(
                         Icons.sentiment_satisfied_alt,
                         size: kIconsSize,
-                        color: kMainColorGreen,
+                        color: MTColors.kMainColorGreen,
                       ),
                       Icon(
                         Icons.sentiment_very_dissatisfied,
                         size: kIconsSize,
-                        color: kMainColorRed,
+                        color: MTColors.kMainColorRed,
                       ),
                     ],
                   ),
@@ -88,7 +90,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                       child: SfSlider.vertical(
                         min: -10,
                         max: 10,
-                        activeColor: kMainColorYellow,
+                        activeColor: MTColors.kMainColorYellow,
                         stepSize: 1.0,
                         value: _value,
                         interval: 1.0,
@@ -156,8 +158,8 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                                   style: TextStyle(
                                                     color: Colors.black,
                                                   ),
-                                                  decoration:
-                                                      kTextFieldInputDecoration,
+                                                  decoration: MTDecorations
+                                                      .kTextFieldInputDecoration,
                                                   onChanged: (value) {
                                                     if (value.trim() != '') {
                                                       comment = value;
@@ -171,9 +173,10 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
                                                 children: [
-                                                  Button(
+                                                  MTButton(
                                                     text: 'Отменить',
-                                                    color: kInactiveBtnColor,
+                                                    color: MTColors
+                                                        .kInactiveBtnColor,
                                                     onPressed: () {
                                                       setState(() {
                                                         comment =
@@ -186,7 +189,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                                                   SizedBox(
                                                     width: 10.0,
                                                   ),
-                                                  Button(
+                                                  MTButton(
                                                     text: 'Сохранить',
                                                     onPressed: () {
                                                       setState(() {
@@ -234,7 +237,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  child: Button(
+                  child: MTButton(
                     text: 'Сохранить',
                     onPressed: () async {
                       var graphPoint = GraphPoint(
@@ -246,7 +249,7 @@ class _HomePageScreenState extends State<HomePageScreen> {
                         db.insertGraphPoint(graphPoint);
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            backgroundColor: kMainColorYellow,
+                            backgroundColor: MTColors.kMainColorYellow,
                             content: const Text('Данные сохранены'),
                             action: SnackBarAction(
                               label: 'Закрыть',

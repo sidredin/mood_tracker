@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:mood_tracker/constants.dart';
+import 'package:mood_tracker/views/styling/mt_colors.dart';
+import 'package:mood_tracker/views/styling/mt_text_styles.dart';
 
-class Button extends StatelessWidget {
-  const Button({
+class MTButton extends StatelessWidget {
+  const MTButton({
     Key? key,
     required this.text,
     this.color,
@@ -19,10 +20,10 @@ class Button extends StatelessWidget {
       child: Text(text),
       onPressed: onPressed,
       style: ButtonStyle(
-        textStyle: kBtnTextStyle,
+        textStyle: MTTextStyles.kBtnTextStyle,
         backgroundColor: (color != null)
             ? MaterialStateProperty.all<Color?>(color)
-            : MaterialStateProperty.all<Color>(kMainColorGreen),
+            : MaterialStateProperty.all<Color>(MTColors.kMainColorGreen),
       ),
     );
   }

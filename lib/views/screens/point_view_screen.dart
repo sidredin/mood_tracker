@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mood_tracker/examples.dart';
+import 'package:mood_tracker/views/screens/examples.dart';
 
 class PointViewScreen extends StatefulWidget {
   PointViewScreen({Key? key, this.title}) : super(key: key);
